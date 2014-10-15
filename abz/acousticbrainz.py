@@ -12,6 +12,8 @@ import urlparse
 import uuid
 import sqlite3
 
+import datetime
+
 import requests
 import taglib
 
@@ -60,7 +62,7 @@ def run_extractor(input_path, output_path):
                                            return code
     """
     extractor = config.settings["essentia_path"]
-    args = [extractor, input_path, output_path]
+    args = ['timeout', '2m', extractor, input_path, output_path]
     subprocess.check_call(args)
 
 def submit_features(recordingid, features):
@@ -89,6 +91,7 @@ def process_file(filepath):
         return
     recid = get_musicbrainz_recordingid(filepath)
 
+    print(datetime.datetime.now().strftime('%c'))
     if recid:
         print(" - has recid %s" % recid)
         fd, tmpname = tempfile.mkstemp(suffix='.json')
@@ -98,7 +101,7 @@ def process_file(filepath):
             run_extractor(filepath, tmpname)
         except subprocess.CalledProcessError as e:
             print(" ** The extractor's return code was %s" % e.returncode)
-            add_to_filelist(filepath, "extractor")
+            add_to_filelist(filepath, "extractor-%s" % e.returncode)
         else:
             tmpname = extractor_output_file_name(tmpname)
             try:
