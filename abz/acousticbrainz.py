@@ -62,7 +62,7 @@ def run_extractor(input_path, output_path):
                                            return code
     """
     extractor = config.settings["essentia_path"]
-    args = ['timeout', '15m', extractor, input_path, output_path]
+    args = [extractor, input_path, output_path]
     subprocess.check_call(args)
 
 def submit_features(recordingid, features):
