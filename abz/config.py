@@ -95,7 +95,10 @@ def load_settings():
     settings["host"] = config.get("acousticbrainz", "host")
 
     essentia = config.get("essentia", "path")
-    essentia_path = os.path.abspath(distutils.spawn.find_executable(essentia))
+    try:
+        essentia_path = os.path.abspath(distutils.spawn.find_executable(essentia))
+    except AttributeError:
+        essentia_path = None
     if essentia_path is None:
         raise Exception ("Cannot find the extractor %r" % essentia)
 
