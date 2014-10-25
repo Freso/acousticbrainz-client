@@ -12,7 +12,7 @@ setup(
     packages=['abz'],
     package_data={'abz': ['default.conf']},
     scripts = ['abzsubmit'],
-    data_files = [('', ['streaming_extractor_music'])],
+    data_files = [('bin', ['streaming_extractor_music'])],
     license='GPL3+',
     classifiers=[
         "Development Status :: 3 - Alpha",
