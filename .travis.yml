@@ -1,0 +1,24 @@
+language: python
+python:
+  - "2.6"
+  - "2.7"
+  - "pypy"
+  - "3.2"
+  - "3.3"
+  - "3.4"
+  - "pypy3"
+cache:
+  directories:
+    - $HOME/.pip/cache
+before_install:
+  - wget -O - ftp://vm.musicbrainz.org/pub/acousticbrainz/extractors/essentia-extractor-21ef5f41f15ed1f80c8f9b36802430055d3b93e9-linux-x86_64.tar.gz | tar -xvz --strip-components=1
+install:
+  # Install dependencies
+  - pip install --download-cache='$HOME/.pip/cache' --use-mirrors -r requirements.txt
+  # Setup abzsubmit
+  - python setup.py install
+# Try running the client
+# There's currently not a proper test suite, so the test is mostly just a "will
+# it run" type of test.
+script:
+  - ./abzsubmit $HOME
