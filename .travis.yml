@@ -22,3 +22,6 @@ install:
 # it run" type of test.
 script:
   - ./abzsubmit $HOME
+# Notify people that tests were run
+notifications:
+  irc: "chat.freenode.net#musicbrainz-devel"
