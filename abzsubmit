@@ -6,19 +6,22 @@
 # acousticbrainz-client is available under the terms of the GNU
 # General Public License, version 3 or higher. See COPYING for more details.
 
-import argparse
+from __future__ import print_function
+import sys
 from abz import acousticbrainz
 
 def main(paths):
     for path in paths:
         acousticbrainz.process(path)
+    print()
 
 if __name__ == "__main__":
-    p = argparse.ArgumentParser(description="Acousticbrainz client")
-    p.add_argument("p", help="Path to upload", nargs='*')
+    if len(sys.argv) < 2:
+        print("usage: abzsubmit [submissionpath [morepath ...]]", file=sys.stderr)
+        sys.exit(1)
 
-    args = p.parse_args()
-    if args.p:
-        main(args.p)
-    else:
-        p.print_usage()
+    try:
+        main(sys.argv[1:])
+    except KeyboardInterrupt:
+        acousticbrainz.cleanup()
+        raise
