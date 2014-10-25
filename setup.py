@@ -11,7 +11,8 @@ setup(
     url="http://acousticbrainz.org",
     packages=['abz'],
     package_data={'abz': ['default.conf']},
-    scripts = ['abzsubmit', 'streaming_extractor_music'],
+    scripts = ['abzsubmit'],
+    data_files = [('bin', ['streaming_extractor_music'])],
     license='GPL3+',
     classifiers=[
         "Development Status :: 3 - Alpha",
