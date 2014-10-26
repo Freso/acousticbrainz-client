@@ -26,3 +26,14 @@ def decode(msg):
         return msg.decode("utf-8", "replace")
     else:
         return msg
+
+def output(msg):
+    """decode if str is not a byte string (Python 3), no-op otherwise
+
+    On Python 3 the print function wants a unicode string,
+    rather than a byte string as on Python 2.
+    """
+    if str == bytes:
+        return msg
+    else:
+        return decode(msg)
