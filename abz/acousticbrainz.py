@@ -30,7 +30,7 @@ GREEN = "\x1b[32m"
 def _update_progress(msg, status="...", colour=RESET):
     if VERBOSE:
         sys.stdout.write("%s[%-10s]%s " % (colour, status, RESET))
-        print(msg.encode("ascii", "ignore"))
+        print(compat.output(msg))
     else:
         sys.stdout.write("%s[%-10s]%s " % (colour, status, RESET))
         sys.stdout.write(msg+"\x1b[K\r")
