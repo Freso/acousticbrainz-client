@@ -30,7 +30,7 @@ GREEN = "\x1b[32m"
 def _update_progress(msg, status="...", colour=RESET):
     if VERBOSE:
         sys.stdout.write("%s[%-10s]%s " % (colour, status, RESET))
-        print(msg.encode("ascii", "ignore"))
+        print(compat.output(msg))
     else:
         sys.stdout.write("%s[%-10s]%s " % (colour, status, RESET))
         sys.stdout.write(msg+"\x1b[K\r")
@@ -98,17 +98,17 @@ def process_file(filepath):
     if retcode == 2:
         _update_progress(filepath, ":( nombid", RED)
         print()
-        print(out)
+        print(compat.output(out))
         add_to_filelist(filepath, "nombid")
     elif retcode == 1:
         _update_progress(filepath, ":( extract", RED)
         print()
-        print(out)
+        print(compat.output(out))
         add_to_filelist(filepath, "extractor")
     elif retcode > 0 or retcode < 0: # Unknown error, not 0, 1, 2
         _update_progress(filepath, ":( unk %s" % retcode, RED)
         print()
-        print(out)
+        print(compat.output(out))
     else:
         if os.path.isfile(tmpname):
             try:
