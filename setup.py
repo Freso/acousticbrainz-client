@@ -20,6 +20,7 @@ setup(
     package_data={'abz': ['default.conf']},
     scripts=['abzsubmit'],
     data_files=[('bin', ['streaming_extractor_music'])],
+    python_requires='>=2.6',
     install_requires=['requests>2.4'],
     license='GPL3+',
     classifiers=[
